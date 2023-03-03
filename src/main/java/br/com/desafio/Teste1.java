@@ -1,37 +1,41 @@
 package br.com.desafio;
 
+import br.com.desafio.dao.csv.OpenCsvRead;
 import br.com.desafio.model.Cliente;
 import br.com.desafio.model.response.ClienteResponse;
 import br.com.desafio.search.ClienteParametroFiltro;
 import br.com.desafio.services.ClienteService;
 import br.com.desafio.util.ClienteUtil;
+import com.opencsv.exceptions.CsvDataTypeMismatchException;
+import com.opencsv.exceptions.CsvRequiredFieldEmptyException;
 
+import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicInteger;
+import java.util.stream.Collectors;
 
 public class Teste1 {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws CsvRequiredFieldEmptyException, CsvDataTypeMismatchException, IOException {
 
         ClienteService service = new ClienteService();
         ClienteParametroFiltro filtro = new ClienteParametroFiltro();
-        filtro.setIdade("20");
-        List<Cliente> clientes = service.findAll(filtro);
-//        clientes.forEach(System.out::println);
-//        String ani = clientes.get(0).getAniversario();
-//        System.out.println(ani);
-//
-//        String[] data = ani.split("-");
-//
-//        LocalDate localDate = LocalDate.of(LocalDate.now().getYear() - clientes.get(0).getIdade(),
-//                Integer.parseInt(data[1]), Integer.parseInt(data[0]));
-//        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yy");
-//        System.out.println(localDate.format(formatter));
         ClienteUtil util = new ClienteUtil();
+        filtro.setMesAniversario("2");
+        List<Cliente> clientes = service.findAll(filtro);
         List<ClienteResponse> responses = new ArrayList<>();
-        clientes.forEach(cliente -> responses.add(util.convertCliente(cliente)));
+        List<ClienteResponse> finalResponses = responses;
+        clientes.forEach(c -> finalResponses.add(new ClienteResponse(c.getNome(), c.getIdade(), c.getSexo(), c.getAniversario())));
+        responses = util.incrementId(finalResponses);
         responses.forEach(System.out::println);
+//        responses.forEach(System.out::println);
+        OpenCsvRead.writeListToCsv(responses);
+//        OpenCsvRead.writeAClienteCsv(responses.get(0));
+//        OpenCsvRead.readCsv();
+//        List asd = responses.stream().filter(clienteResponse -> !(clienteResponse.getId() == 1)).collect(Collectors.toList());
+//        asd.forEach(System.out::println);
     }
 }

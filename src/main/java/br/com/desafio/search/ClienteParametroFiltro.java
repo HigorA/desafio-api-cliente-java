@@ -2,16 +2,25 @@ package br.com.desafio.search;
 
 public class ClienteParametroFiltro {
 
-    private String idade;
+    private String maiorIdade;
+    private String menorIdade;
     private String sexo;
-    private String aniversario;
+    private String mesAniversario;
 
-    public String getIdade() {
-        return idade;
+    public String getMaiorIdade() {
+        return maiorIdade;
     }
 
-    public void setIdade(String idade) {
-        this.idade = idade;
+    public void setMaiorIdade(String maiorIdade) {
+        this.maiorIdade = maiorIdade;
+    }
+
+    public String getMenorIdade() {
+        return menorIdade;
+    }
+
+    public void setMenorIdade(String menorIdade) {
+        this.menorIdade = menorIdade;
     }
 
     public String getSexo() {
@@ -22,11 +31,11 @@ public class ClienteParametroFiltro {
         this.sexo = sexo;
     }
 
-    public String getAniversario() {
-        return aniversario;
+    public String getMesAniversario() {
+        return mesAniversario;
     }
 
-    public void setAniversario(String aniversario) {
-        this.aniversario = aniversario;
+    public void setMesAniversario(String mesAniversario) {
+        this.mesAniversario = mesAniversario;
     }
 }

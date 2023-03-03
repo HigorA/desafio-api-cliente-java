@@ -1,6 +1,7 @@
 package br.com.desafio.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.time.LocalDate;
 
@@ -46,6 +47,7 @@ public class Cliente implements Comparable<Cliente>{
         this.sexo = sexo;
     }
 
+    @JsonProperty("dataNascimento")
     public String getAniversario() {
         return aniversario;
     }

@@ -1,16 +1,32 @@
 package br.com.desafio.model.response;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.opencsv.bean.CsvBindByName;
+import com.opencsv.bean.CsvBindByPosition;
 
 import java.time.LocalDate;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class ClienteResponse implements Comparable<ClienteResponse>{
 
+    @CsvBindByName
+    @CsvBindByPosition(position = 0)
     private Long id;
+
+    @CsvBindByName
+    @CsvBindByPosition(position = 1)
     private String nome;
+
+    @CsvBindByName
+    @CsvBindByPosition(position = 2)
     private Integer idade;
+
+    @CsvBindByName
+    @CsvBindByPosition(position = 3)
     private String sexo;
+
+    @CsvBindByName
+    @CsvBindByPosition(position = 4)
     private String dataNascimento;
 
     public ClienteResponse() {

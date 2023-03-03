@@ -1,5 +1,6 @@
 package br.com.desafio.dao;
 
+import org.json.JSONObject;
 import org.springframework.web.reactive.function.client.WebClient;
 
 public class ClienteApi {
@@ -10,12 +11,13 @@ public class ClienteApi {
 
     private static WebClient webClient = WebClient.create();
 
-    public static String requisicaoApi() {
+    public static JSONObject requisicaoApi() {
         WebClient.ResponseSpec responseSpec = webClient.get()
                 .uri(apiUrl)
                 .header(headerName,headerValue)
                 .retrieve();
 
-        return responseSpec.bodyToMono(String.class).block();
+        String jsonString = responseSpec.bodyToMono(String.class).block();
+        return new JSONObject(jsonString);
     }
 }

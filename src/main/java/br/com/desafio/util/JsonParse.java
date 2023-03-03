@@ -2,24 +2,23 @@ package br.com.desafio.util;
 
 import br.com.desafio.model.Cliente;
 import com.google.gson.Gson;
+import org.json.JSONArray;
+import org.json.JSONObject;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class JsonParse {
 
-    public static List<Cliente> fromJson(String json) {
-        int pri = json.indexOf('[');
-        int ult = json.lastIndexOf(']');
-        String teste1 = json.substring(pri + 1, ult);
-        String teste2 = teste1.replace("},{", "}/{");
-        System.out.println(teste2.getClass());
-        List<String> teste3 = List.of(teste2.split("/"));
+    private Gson gson = new Gson();
 
-
-        Gson gson = new Gson();
+    public List<Cliente> fromJson(JSONObject json) {
+        JSONObject record = json.getJSONObject("record");
+        JSONArray clientesJson = record.getJSONArray("clientes");
         List<Cliente> clientes = new ArrayList<>();
-        teste3.forEach(t -> clientes.add(gson.fromJson(t , Cliente.class)));
+
+        clientesJson.forEach(j -> clientes.add(gson.fromJson(j.toString(), Cliente.class)));
         return clientes;
     }
 }
