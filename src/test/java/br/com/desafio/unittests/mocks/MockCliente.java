@@ -5,6 +5,8 @@ import br.com.desafio.model.vo.ClienteVO;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.List;
 
 public class MockCliente {
 
@@ -36,5 +38,21 @@ public class MockCliente {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM");
         cliente.setDataNascimento(data.format(formatter));
         return cliente;
+    }
+
+    public List<Cliente> mockListEntity(Integer number) {
+        List<Cliente> clientes = new ArrayList<>();
+        for (int i = 0; i < number  ; i++) {
+            clientes.add(mockEntity(number));
+        }
+        return clientes;
+    }
+
+    public List<ClienteVO> mockListVO(Integer number) {
+        List<ClienteVO> clientes = new ArrayList<>();
+        for (int i = 0; i < number  ; i++) {
+            clientes.add(mockVO(number));
+        }
+        return clientes;
     }
 }
