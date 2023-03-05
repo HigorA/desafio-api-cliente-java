@@ -1,14 +1,16 @@
 package br.com.desafio.search;
 
-import br.com.desafio.model.Cliente;
+import br.com.desafio.model.vo.ClienteVO;
+import br.com.desafio.util.ClienteUtil;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class ClienteFiltro {
+public class ClienteVOFiltro {
 
-    public static List<Cliente> filtro(ClienteParametroFiltro param, List<Cliente> clientes) {
-        List<Cliente> filtrado = clientes;
+    public static List<ClienteVO> filtro(ClienteParametroFiltro param, List<ClienteVO> clientes) {
+        List<ClienteVO> filtrado = clientes;
         if (param.getMenorIdade() != null && param.getMaiorIdade() != null) {
             filtrado = filtrado
                     .stream()
@@ -25,9 +27,11 @@ public class ClienteFiltro {
         if (param.getMesAniversario() != null) {
             filtrado = filtrado
                     .stream()
-                    .filter(cliente -> Integer.parseInt(cliente.getAniversario().substring(3,5)) == Integer.parseInt(param.getMesAniversario()))
+                    .filter(cliente -> Integer.parseInt(cliente.getDataNascimento().substring(3,5)) == Integer.parseInt(param.getMesAniversario()))
                     .collect(Collectors.toList());
         }
+
+        filtrado = ClienteUtil.incrementId(filtrado);
         return filtrado;
     }
 }

@@ -1,6 +1,6 @@
 package br.com.desafio.util;
 
-import br.com.desafio.model.response.ClienteResponse;
+import br.com.desafio.model.vo.ClienteVO;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -10,7 +10,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 public class ClienteUtil {
 
-    public String convertAniversario(String aniversario, Integer idade) {
+    public static String convertAniversario(String aniversario, Integer idade) {
         String[] aniver = aniversario.split("-");
         LocalDate localDate = LocalDate.of(LocalDate.now().getYear() - idade,
                 Integer.parseInt(aniver[1]), Integer.parseInt(aniver[0]));
@@ -18,10 +18,10 @@ public class ClienteUtil {
         return localDate.format(formatter);
     }
 
-    public List<ClienteResponse> incrementId(List<ClienteResponse> lista) {
+    public static List<ClienteVO> incrementId(List<ClienteVO> lista) {
         AtomicInteger id = new AtomicInteger();
-        List<ClienteResponse> responses = new ArrayList<>(lista);
-        responses.forEach(c -> c.setId((long) id.addAndGet(1)));
+        List<ClienteVO> responses = new ArrayList<>(lista);
+        responses.forEach(c -> c.setId(id.addAndGet(1)));
         return responses;
     }
 }

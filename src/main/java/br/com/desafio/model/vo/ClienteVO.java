@@ -1,17 +1,15 @@
-package br.com.desafio.model.response;
+package br.com.desafio.model.vo;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.opencsv.bean.CsvBindByName;
 import com.opencsv.bean.CsvBindByPosition;
 
-import java.time.LocalDate;
-
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class ClienteResponse implements Comparable<ClienteResponse>{
+public class ClienteVO implements Comparable<ClienteVO>{
 
     @CsvBindByName
     @CsvBindByPosition(position = 0)
-    private Long id;
+    private Integer id;
 
     @CsvBindByName
     @CsvBindByPosition(position = 1)
@@ -29,17 +27,17 @@ public class ClienteResponse implements Comparable<ClienteResponse>{
     @CsvBindByPosition(position = 4)
     private String dataNascimento;
 
-    public ClienteResponse() {
+    public ClienteVO() {
     }
 
-    public ClienteResponse(String nome, Integer idade, String sexo, String dataNascimento) {
+    public ClienteVO(String nome, Integer idade, String sexo, String dataNascimento) {
         this.nome = nome;
         this.idade = idade;
         this.sexo = sexo;
         this.dataNascimento = dataNascimento;
     }
 
-    public ClienteResponse(Long id, String nome, Integer idade, String sexo, String dataNascimento) {
+    public ClienteVO(Integer id, String nome, Integer idade, String sexo, String dataNascimento) {
         this.id = id;
         this.nome = nome;
         this.idade = idade;
@@ -47,11 +45,11 @@ public class ClienteResponse implements Comparable<ClienteResponse>{
         this.dataNascimento = dataNascimento;
     }
 
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -88,7 +86,7 @@ public class ClienteResponse implements Comparable<ClienteResponse>{
     }
 
     @Override
-    public int compareTo(ClienteResponse o) {
+    public int compareTo(ClienteVO o) {
         if (getNome() == null || o.getNome() == null) {
             return 0;
         }

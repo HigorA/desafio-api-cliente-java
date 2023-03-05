@@ -1,7 +1,6 @@
 package br.com.desafio.dao;
 
 import br.com.desafio.model.Cliente;
-import br.com.desafio.model.MetaData;
 import br.com.desafio.util.JsonParse;
 import org.json.JSONObject;
 
