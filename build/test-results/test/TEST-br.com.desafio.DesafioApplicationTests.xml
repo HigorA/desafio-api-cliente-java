@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="br.com.desafio.DesafioApplicationTests" tests="1" skipped="0" failures="0" errors="0" timestamp="2023-03-12T02:08:09" hostname="DESKTOP-AKRDE92" time="0.319">
+  <properties/>
+  <testcase name="contextLoads()" classname="br.com.desafio.DesafioApplicationTests" time="0.319"/>
+  <system-out><![CDATA[23:08:07.080 [Test worker] DEBUG org.springframework.boot.test.context.SpringBootTestContextBootstrapper - Neither @ContextConfiguration nor @ContextHierarchy found for test class [DesafioApplicationTests]: using SpringBootContextLoader
+23:08:07.084 [Test worker] DEBUG org.springframework.test.context.support.AbstractContextLoader - Could not detect default resource locations for test class [br.com.desafio.DesafioApplicationTests]: no resource found for suffixes {-context.xml, Context.groovy}.
+23:08:07.085 [Test worker] INFO org.springframework.test.context.support.AnnotationConfigContextLoaderUtils - Could not detect default configuration classes for test class [br.com.desafio.DesafioApplicationTests]: DesafioApplicationTests does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+23:08:07.102 [Test worker] DEBUG org.springframework.boot.test.context.SpringBootTestContextBootstrapper - Using ContextCustomizers for test class [DesafioApplicationTests]: [DisableObservabilityContextCustomizer, PropertyMappingContextCustomizer, Customizer, ExcludeFilterContextCustomizer, DuplicateJsonObjectContextCustomizer, MockitoContextCustomizer, TestRestTemplateContextCustomizer, WebTestClientContextCustomizer]
+23:08:07.155 [Test worker] DEBUG org.springframework.context.annotation.ClassPathScanningCandidateComponentProvider - Identified candidate component class: file [C:\dev\Learn\Projetos\Higor\desafio-api-cliente-java\build\classes\java\main\br\com\desafio\DesafioApplication.class]
+23:08:07.156 [Test worker] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper - Found @SpringBootConfiguration br.com.desafio.DesafioApplication for test class br.com.desafio.DesafioApplicationTests
+23:08:07.241 [Test worker] DEBUG org.springframework.test.context.util.TestContextSpringFactoriesUtils - Skipping candidate TestExecutionListener [org.springframework.test.context.transaction.TransactionalTestExecutionListener] due to a missing dependency. Specify custom TestExecutionListener classes or make the default TestExecutionListener classes and their required dependencies available. Offending class: [org/springframework/transaction/interceptor/TransactionAttributeSource]
+23:08:07.242 [Test worker] DEBUG org.springframework.test.context.util.TestContextSpringFactoriesUtils - Skipping candidate TestExecutionListener [org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener] due to a missing dependency. Specify custom TestExecutionListener classes or make the default TestExecutionListener classes and their required dependencies available. Offending class: [org/springframework/transaction/interceptor/TransactionAttribute]
+23:08:07.244 [Test worker] DEBUG org.springframework.boot.test.context.SpringBootTestContextBootstrapper - Using TestExecutionListeners for test class [DesafioApplicationTests]: [ServletTestExecutionListener, DirtiesContextBeforeModesTestExecutionListener, ApplicationEventsTestExecutionListener, MockitoTestExecutionListener, DependencyInjectionTestExecutionListener, DirtiesContextTestExecutionListener, EventPublishingTestExecutionListener, RestDocsTestExecutionListener, MockRestServiceServerResetTestExecutionListener, MockMvcPrintOnlyOnFailureTestExecutionListener, WebDriverTestExecutionListener, MockWebServiceServerTestExecutionListener, ResetMocksTestExecutionListener]
+23:08:07.245 [Test worker] DEBUG org.springframework.test.context.support.AbstractDirtiesContextTestExecutionListener - Before test class: class [DesafioApplicationTests], class annotated with @DirtiesContext [false] with mode [null]
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+ :: Spring Boot ::                (v3.0.3)
+
+2023-03-11T23:08:07.436-03:00  WARN 8404 --- [    Test worker] ory$DuplicateJsonObjectContextCustomizer : 
+
+Found multiple occurrences of org.json.JSONObject on the class path:
+
+	jar:file:/C:/Users/Luan/.gradle/caches/modules-2/files-2.1/org.json/json/20220320/6df2c050972619466f6dcef7654ef9bcc01dfd0/json-20220320.jar!/org/json/JSONObject.class
+	jar:file:/C:/Users/Luan/.gradle/caches/modules-2/files-2.1/com.vaadin.external.google/android-json/0.0.20131108.vaadin1/fa26d351fe62a6a17f5cda1287c1c6110dec413f/android-json-0.0.20131108.vaadin1.jar!/org/json/JSONObject.class
+
+You may wish to exclude one of them to ensure predictable runtime behavior
+
+2023-03-11T23:08:07.447-03:00  INFO 8404 --- [    Test worker] br.com.desafio.DesafioApplicationTests   : Starting DesafioApplicationTests using Java 17.0.6 with PID 8404 (started by Luan in C:\dev\Learn\Projetos\Higor\desafio-api-cliente-java)
+2023-03-11T23:08:07.447-03:00  INFO 8404 --- [    Test worker] br.com.desafio.DesafioApplicationTests   : No active profile set, falling back to 1 default profile: "default"
+2023-03-11T23:08:09.218-03:00  INFO 8404 --- [    Test worker] br.com.desafio.DesafioApplicationTests   : Started DesafioApplicationTests in 1.941 seconds (process running for 2.88)
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

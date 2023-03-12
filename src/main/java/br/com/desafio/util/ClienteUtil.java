@@ -11,6 +11,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 public class ClienteUtil {
 
     public static String convertAniversario(String aniversario, Integer idade) {
+        //TODO Tratar a data para não tomar erro no split caso a data seja inserida de outra forma (DD/AA)
         String[] aniver = aniversario.split("-");
         LocalDate localDate = LocalDate.of(LocalDate.now().getYear() - idade,
                 Integer.parseInt(aniver[1]), Integer.parseInt(aniver[0]));
