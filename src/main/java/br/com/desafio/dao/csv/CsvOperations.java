@@ -35,7 +35,7 @@ public class CsvOperations {
     }
 
     public static void writeAClienteCsv(ClienteVO clienteVO) {
-        //TODO refazer para preparar o código para caso o arquivo ainda não exista
+        //TODO  refazer para preparar o código para caso o arquivo ainda não exista
         List<ClienteVO> clientesFromCsv = readCsv();
         if (clienteVO.getDataNascimento().length() <= 5) {
             clienteVO.setDataNascimento(ClienteUtil.convertAniversario(clienteVO.getDataNascimento(), clienteVO.getIdade()));
@@ -45,7 +45,7 @@ public class CsvOperations {
     }
 
     public static void writeListToCsv(List<ClienteVO> clienteVOS) {
-        //TODO o arquivo CSV não está com cabeçalho
+        //TODO  o arquivo CSV não está com cabeçalho
         clienteVOS.forEach(c -> c.setId(null));
         clienteVOS = clienteVOS.stream().sorted(ClienteVO::compareTo).collect(Collectors.toList());
         List<ClienteVO> clientesComId = ClienteUtil.incrementId(clienteVOS);
@@ -65,7 +65,7 @@ public class CsvOperations {
     }
 
     public static void deleteRowFromCsv(Integer id) {
-        //TODO o arquivo CSV não está com cabeçalho
+        //TODO  o arquivo CSV não está com cabeçalho
         List<ClienteVO> clientesFromCsv = readCsv();
 
         boolean notFound = (clientesFromCsv.stream().noneMatch(o -> Objects.equals(o.getId(), id)));
@@ -76,7 +76,7 @@ public class CsvOperations {
     }
 
     public static void updateRowFromCsv(ClienteVO clienteVO) {
-        //TODO o arquivo CSV não está com cabeçalho
+        //TODO  o arquivo CSV não está com cabeçalho
         List<ClienteVO> clientesFromCsv = readCsv();
         List<ClienteVO> listaComElemento = clientesFromCsv.stream().filter(cliente -> (Objects.equals(cliente.getId(), clienteVO.getId()))).collect(Collectors.toList());
 
