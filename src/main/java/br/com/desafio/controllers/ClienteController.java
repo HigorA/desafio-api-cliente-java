@@ -31,8 +31,7 @@ public class ClienteController implements ControllerOpenApi {
             @RequestParam(required = false) String aniversario
     )
     {
-        ClienteParametroFiltro filtrate = new ClienteParametroFiltro(menorIdade, maiorIdade, sexo, aniversario);
-        return ResponseEntity.status(HttpStatus.OK).body(service.findAll(filtrate, pageNumber, pageSize));
+        return ResponseEntity.status(HttpStatus.OK).body(service.findAll(menorIdade, maiorIdade, sexo, aniversario, pageNumber, pageSize));
     }
 
     @GetMapping("/api-with-id")
@@ -56,7 +55,6 @@ public class ClienteController implements ControllerOpenApi {
             @RequestParam(required = false) String sexo,
             @RequestParam(required = false) String aniversario
     ) {
-        ClienteParametroFiltro filtrate = new ClienteParametroFiltro(menorIdade, maiorIdade, sexo, aniversario);
         return ResponseEntity.status(HttpStatus.OK).body(service.findAllFromCsv(menorIdade, maiorIdade, sexo, aniversario, pageNumber, pageSize));
     }
 

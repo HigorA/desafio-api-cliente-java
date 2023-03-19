@@ -27,11 +27,18 @@ public class ClienteService {
 
     private final ClienteDAO dao = new ClienteDAO();
 
-    public PagedResource findAll(ClienteParametroFiltro filtro, Integer pageNumber, Integer pageSize) {
+    public PagedResource findAll(
+            Integer menorIdade,
+            Integer maiorIdade,
+            String sexo,
+            String aniversario,
+            Integer pageNumber,
+            Integer pageSize) {
+        ClienteParametroFiltro filtrate = new ClienteParametroFiltro(menorIdade, maiorIdade, sexo, aniversario);
         List<Cliente> clientes = dao.findAll();
         clientes = clientes.stream().sorted(Cliente::compareTo).collect(Collectors.toList());
         clientes.forEach(c -> c.setAniversario(ClienteUtil.convertAniversario(c.getAniversario(), c.getIdade())));
-        List<Cliente> filtrado = ClienteFiltro.filtro(filtro, clientes);
+        List<Cliente> filtrado = ClienteFiltro.filtro(filtrate, clientes);
         Pageable pageable = PageRequest.of(pageNumber, pageSize);
 
         int start =(int) pageable.getOffset();
