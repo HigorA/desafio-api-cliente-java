@@ -6,19 +6,19 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class PagedResource<T> {
+public class PagedResource {
 
-    private List<T> clientes;
+    private List<?> clientes;
     private final Map<String, Number> metaData;
 
-    public PagedResource(Page<T> page) {
+    public PagedResource(Page<?> page) {
         super();
         this.setClientes(page.getContent());
         this.metaData = new HashMap<>();
         populateMetadata(page);
     }
 
-    private void populateMetadata(Page<T> page) {
+    private void populateMetadata(Page<?> page) {
         int size = page.getSize();
         int totalPages = page.getTotalPages();
         int number = page.getNumber();
@@ -29,11 +29,11 @@ public class PagedResource<T> {
         metaData.put("total", total);
     }
 
-    public List<T> getClientes() {
+    public List<?> getClientes() {
         return clientes;
     }
 
-    public void setClientes(List<T> clientes) {
+    public void setClientes(List<?> clientes) {
         this.clientes = clientes;
     }
 

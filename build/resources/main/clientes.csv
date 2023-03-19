@@ -1,10 +1,2 @@
-1;Amanda;17;F;01/03/06
-2;Artur;25;M;29/01/98
-3;Bia;23;F;01/12/00
-4;Fred;23;M;02/03/00
-5;Higor;22;M;23/01/01
-6;Ingrid;27;F;06/09/96
-7;Jessica;23;F;02/10/00
-8;Jessica;23;F;04/12/00
-9;Marcos;20;M;09/06/03
-10;Marcos;20;M;10/02/03
+ID;NOME;IDADE;SEXO;DATANASC
+1;teste1;1;m;01/01/01

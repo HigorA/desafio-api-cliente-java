@@ -2,15 +2,23 @@ package br.com.desafio.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.opencsv.bean.CsvBindByName;
 
 import java.time.LocalDate;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Cliente implements Comparable<Cliente>{
 
+    @CsvBindByName(column = "nome")
     private String nome;
+
+    @CsvBindByName(column = "idade")
     private Integer idade;
+
+    @CsvBindByName(column = "sexo")
     private String sexo;
+
+    @CsvBindByName(column = "dataNasc")
     private String aniversario;
 
     public Cliente() {

@@ -24,7 +24,7 @@ public class MockCliente {
         cliente.setIdade(number);
         cliente.setSexo(((number %2 ) == 0 )? "M" : "F");
         LocalDate data = LocalDate.of(number, number, number);
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM");
         cliente.setAniversario(data.format(formatter));
         return cliente;
     }
@@ -40,18 +40,18 @@ public class MockCliente {
         return cliente;
     }
 
-    public List<Cliente> mockListEntity(Integer number) {
+    public List<Cliente> mockListEntity() {
         List<Cliente> clientes = new ArrayList<>();
-        for (int i = 0; i < number  ; i++) {
-            clientes.add(mockEntity(number));
+        for (int i = 1; i <= 12  ; i++) {
+            clientes.add(mockEntity(i));
         }
         return clientes;
     }
 
-    public List<ClienteVO> mockListVO(Integer number) {
+    public List<ClienteVO> mockListVO() {
         List<ClienteVO> clientes = new ArrayList<>();
-        for (int i = 0; i < number  ; i++) {
-            clientes.add(mockVO(number));
+        for (int i = 1; i <= 12  ; i++) {
+            clientes.add(mockVO(i));
         }
         return clientes;
     }

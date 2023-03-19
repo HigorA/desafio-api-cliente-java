@@ -10,6 +10,7 @@ import jakarta.websocket.server.PathParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -31,8 +32,7 @@ public class ClienteController implements ControllerOpenApi {
     )
     {
         ClienteParametroFiltro filtrate = new ClienteParametroFiltro(menorIdade, maiorIdade, sexo, aniversario);
-        PagedResource metaData = service.findAll(filtrate, pageNumber, pageSize);
-        return ResponseEntity.status(HttpStatus.OK).body(metaData);
+        return ResponseEntity.status(HttpStatus.OK).body(service.findAll(filtrate, pageNumber, pageSize));
     }
 
     @GetMapping("/api-with-id")
@@ -44,9 +44,7 @@ public class ClienteController implements ControllerOpenApi {
             @RequestParam(required = false) String sexo,
             @RequestParam(required = false) String aniversario
     ) {
-        ClienteParametroFiltro filtrate = new ClienteParametroFiltro(menorIdade, maiorIdade, sexo, aniversario);
-        PagedResource metaData = service.findAllWithId(filtrate, pageNumber, pageSize);
-        return ResponseEntity.status(HttpStatus.OK).body(metaData);
+        return ResponseEntity.status(HttpStatus.OK).body(service.findAllWithId(menorIdade, maiorIdade, sexo, aniversario, pageNumber, pageSize));
     }
 
     @GetMapping("/csv")
@@ -59,18 +57,17 @@ public class ClienteController implements ControllerOpenApi {
             @RequestParam(required = false) String aniversario
     ) {
         ClienteParametroFiltro filtrate = new ClienteParametroFiltro(menorIdade, maiorIdade, sexo, aniversario);
-        PagedResource metaData = service.findAllFromCsv(filtrate, pageNumber, pageSize);
-        return ResponseEntity.status(HttpStatus.OK).body(metaData);
+        return ResponseEntity.status(HttpStatus.OK).body(service.findAllFromCsv(menorIdade, maiorIdade, sexo, aniversario, pageNumber, pageSize));
     }
 
     @PostMapping
-    public ResponseEntity<?> save(@RequestBody ClienteVO clienteVO) {
+    public ResponseEntity<?> save(@RequestBody @Validated ClienteVO clienteVO) {
         service.save(clienteVO);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
     @PutMapping
-    public ResponseEntity<?> update(@RequestBody ClienteVO clienteVO) {
+    public ResponseEntity<?> update(@RequestBody @Validated ClienteVO clienteVO) {
         service.update(clienteVO);
         return new ResponseEntity<>(HttpStatus.OK);
     }

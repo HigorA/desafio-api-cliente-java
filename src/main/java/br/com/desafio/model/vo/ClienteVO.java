@@ -1,30 +1,29 @@
 package br.com.desafio.model.vo;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.opencsv.bean.CsvBindByName;
-import com.opencsv.bean.CsvBindByPosition;
+import jakarta.validation.constraints.NotBlank;
 
-@JsonIgnoreProperties(ignoreUnknown = true)
+
 public class ClienteVO implements Comparable<ClienteVO>{
 
-    @CsvBindByName
-    @CsvBindByPosition(position = 0)
+    @NotBlank
+    @CsvBindByName(column = "id")
     private Integer id;
 
-    @CsvBindByName
-    @CsvBindByPosition(position = 1)
+    @NotBlank
+    @CsvBindByName(column = "nome")
     private String nome;
 
-    @CsvBindByName
-    @CsvBindByPosition(position = 2)
+    @NotBlank
+    @CsvBindByName(column = "idade")
     private Integer idade;
 
-    @CsvBindByName
-    @CsvBindByPosition(position = 3)
+    @NotBlank
+    @CsvBindByName(column = "sexo")
     private String sexo;
 
-    @CsvBindByName
-    @CsvBindByPosition(position = 4)
+    @NotBlank
+    @CsvBindByName(column = "dataNasc")
     private String dataNascimento;
 
     public ClienteVO() {

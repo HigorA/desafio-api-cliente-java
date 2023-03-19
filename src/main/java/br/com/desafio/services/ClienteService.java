@@ -25,7 +25,7 @@ import java.util.stream.Collectors;
 @Service
 public class ClienteService {
 
-    private ClienteDAO dao = new ClienteDAO();
+    private final ClienteDAO dao = new ClienteDAO();
 
     public PagedResource findAll(ClienteParametroFiltro filtro, Integer pageNumber, Integer pageSize) {
         List<Cliente> clientes = dao.findAll();
@@ -35,12 +35,18 @@ public class ClienteService {
         Pageable pageable = PageRequest.of(pageNumber, pageSize);
 
         int start =(int) pageable.getOffset();
-        int end = (int) ((start + pageable.getPageSize()) > filtrado.size() ? filtrado.size() :  (start + pageable.getPageSize()));
+        int end = (int) (Math.min((start + pageable.getPageSize()), filtrado.size()));
         Page<Cliente> page = new PageImpl<Cliente>(filtrado.subList(start, end), pageable, filtrado.size());
         return new PagedResource(page);
     }
 
-    public PagedResource findAllWithId(ClienteParametroFiltro filtro, Integer pageNumber, Integer pageSize) {
+    public PagedResource findAllWithId(
+            Integer menorIdade,
+            Integer maiorIdade,
+            String sexo,
+            String aniversario,
+            Integer pageNumber,
+            Integer pageSize) {
         List<Cliente> clientes = dao.findAll();
         clientes = clientes.stream().sorted(Cliente::compareTo).collect(Collectors.toList());
         List<ClienteVO> responses = new ArrayList<>();
@@ -48,23 +54,31 @@ public class ClienteService {
                 cliente.getIdade(), cliente.getSexo(), cliente.getAniversario())));
         responses.forEach(v -> v.setDataNascimento(ClienteUtil.convertAniversario(v.getDataNascimento(), v.getIdade())));
         List<ClienteVO> comId = ClienteUtil.incrementId(responses);
-        List<ClienteVO> filtrado = ClienteVOFiltro.filtro(filtro, comId);
+        ClienteParametroFiltro filtrate = new ClienteParametroFiltro(menorIdade, maiorIdade, sexo, aniversario);
+        List<ClienteVO> filtrado = ClienteVOFiltro.filtro(filtrate, comId);
 
         Pageable pageable = PageRequest.of(pageNumber, pageSize);
         int start = (int) pageable.getOffset();
-        int end = ((start + pageable.getPageSize()) > filtrado.size() ? filtrado.size() :  (start + pageable.getPageSize()));
+        int end = (Math.min((start + pageable.getPageSize()), filtrado.size()));
         Page<ClienteVO> page = new PageImpl<ClienteVO>(filtrado.subList(start, end), pageable, filtrado.size());
         return new PagedResource(page);
     }
 
-    public PagedResource findAllFromCsv(ClienteParametroFiltro filtro, Integer pageNumber, Integer pageSize) {
+    public PagedResource findAllFromCsv(
+            Integer menorIdade,
+            Integer maiorIdade,
+            String sexo,
+            String aniversario,
+            Integer pageNumber,
+            Integer pageSize) {
+        ClienteParametroFiltro filtrate = new ClienteParametroFiltro(menorIdade, maiorIdade, sexo, aniversario);
         List<ClienteVO> clientesVO = CsvOperations.readCsv();
         if (clientesVO == null) throw new ResourceNotFoundException("Não foi possivel recuperar os registros gravados no arquivo CSV.");
-        List<ClienteVO> filtrado = ClienteVOFiltro.filtro(filtro, clientesVO);
+        List<ClienteVO> filtrado = ClienteVOFiltro.filtro(filtrate, clientesVO);
 
         Pageable pageable = PageRequest.of(pageNumber, pageSize);
         int start = (int) pageable.getOffset();
-        int end = ((start + pageable.getPageSize()) > filtrado.size() ? filtrado.size() :  (start + pageable.getPageSize()));
+        int end = (Math.min((start + pageable.getPageSize()), filtrado.size()));
         Page<ClienteVO> page = new PageImpl<ClienteVO>(filtrado.subList(start, end), pageable, filtrado.size());
 
         return new PagedResource(page);
@@ -79,14 +93,6 @@ public class ClienteService {
     }
 
     public void save(ClienteVO clienteVO) {
-        if (clienteVO == null) throw new RequiredObjectIsNullException("O objeto é nulo.");
-        if (clienteVO.getNome().isBlank() ||
-                clienteVO.getIdade().describeConstable().isEmpty() ||
-                clienteVO.getSexo().isBlank() ||
-                clienteVO.getDataNascimento().isBlank())
-        {
-            throw new RequiredObjectIsNullException("Os campos do objeto não podem ser vazios");
-        }
         CsvOperations.writeAClienteCsv(clienteVO);
     }
 }
