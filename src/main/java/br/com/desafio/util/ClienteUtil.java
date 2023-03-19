@@ -11,7 +11,10 @@ import java.util.concurrent.atomic.AtomicInteger;
 public class ClienteUtil {
 
     public static String convertAniversario(String aniversario, Integer idade) {
-        String[] aniver = aniversario.split("-");
+        String[] aniver = aniversario.split("[-/]");
+        if (Integer.parseInt(aniver[1]) > 12) {
+            throw new IllegalArgumentException("String de aniversário inválida");
+        }
         LocalDate localDate = LocalDate.of(LocalDate.now().getYear() - idade,
                 Integer.parseInt(aniver[1]), Integer.parseInt(aniver[0]));
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yy");

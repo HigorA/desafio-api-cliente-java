@@ -4,7 +4,6 @@ import br.com.desafio.model.Cliente;
 import com.google.gson.Gson;
 import org.json.JSONArray;
 import org.json.JSONObject;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,7 +16,6 @@ public class JsonParse {
         JSONObject record = json.getJSONObject("record");
         JSONArray clientesJson = record.getJSONArray("clientes");
         List<Cliente> clientes = new ArrayList<>();
-
         clientesJson.forEach(j -> clientes.add(gson.fromJson(j.toString(), Cliente.class)));
         return clientes;
     }
